@@ -3,6 +3,8 @@ package mod.instance;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -11,6 +13,7 @@ import bgWork.handler.CanvasPanelHandler;
 import mod.IClassPainter;
 import mod.IFuncComponent;
 
+@SuppressWarnings("serial")
 public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 {
 	Vector <String>		texts			= new Vector <>();
@@ -19,6 +22,8 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 	int					textShiftX		= 5;
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
+	protected Rectangle[] ports = new Rectangle[4];
+
 	CanvasPanelHandler	cph;
 
 	public BasicClass(CanvasPanelHandler cph)
@@ -56,6 +61,7 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 						(int) (0 + (i + 0.8) * defSize.getHeight()));
 			}
 		}
+		setPort();
 		if (isSelect == true)
 		{
 			paintSelect(g);
@@ -114,16 +120,22 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 	@Override
 	public void paintSelect(Graphics gra)
 	{
-		gra.setColor(Color.BLACK);
-		gra.fillRect(this.getWidth() / 2 - selectBoxSize, 0, selectBoxSize * 2,
-				selectBoxSize);
-		gra.fillRect(this.getWidth() / 2 - selectBoxSize,
-				this.getHeight() - selectBoxSize, selectBoxSize * 2,
-				selectBoxSize);
-		gra.fillRect(0, this.getHeight() / 2 - selectBoxSize, selectBoxSize,
-				selectBoxSize * 2);
-		gra.fillRect(this.getWidth() - selectBoxSize,
-				this.getHeight() / 2 - selectBoxSize, selectBoxSize,
-				selectBoxSize * 2);
+		for(int i = 0; i < ports.length; i++) {
+			gra.fillRect(ports[i].x, ports[i].y, ports[i].width, ports[i].height);
+		}
+	}
+	
+	public void setPort() {
+		int[] x_point = {this.getWidth() / 2 - selectBoxSize, this.getWidth() / 2 - selectBoxSize, 0, this.getWidth() - selectBoxSize};
+		int[] y_point = {0, this.getHeight() - selectBoxSize, this.getHeight() / 2 - selectBoxSize, this.getHeight() / 2 - selectBoxSize};
+		int[] width = {selectBoxSize * 2, selectBoxSize * 2, selectBoxSize, selectBoxSize};
+		int[] height = {selectBoxSize, selectBoxSize, selectBoxSize * 2, selectBoxSize * 2};
+		for(int i = 0; i < ports.length; i++) {
+			ports[i] = new Rectangle(x_point[i], y_point[i], width[i], height[i]);
+		}
+		
+
+
+		
 	}
 }
