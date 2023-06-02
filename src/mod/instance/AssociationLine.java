@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import Define.AreaDefine;
 import Pack.DragPack;
+import bgWork.Core;
 import bgWork.handler.CanvasPanelHandler;
 import mod.IFuncComponent;
 import mod.ILinePainter;
@@ -26,6 +27,7 @@ public class AssociationLine extends JPanel
 	Point				tp				= new Point(0, 0);
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
+	
 	CanvasPanelHandler	cph;
 
 	public AssociationLine(CanvasPanelHandler cph)
@@ -70,6 +72,13 @@ public class AssociationLine extends JPanel
 	}
 	
 	private boolean shouldHighlight() {
+		switch(Core.isClass(Object obj))
+		{
+			case 0:
+				
+			case 1:
+				
+		}
 		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
 //		System.out.println(fromSelectedPortPoint);
 		if (fromSelectedPortPoint != null) {
