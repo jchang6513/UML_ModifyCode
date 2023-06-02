@@ -9,18 +9,15 @@ import java.util.Vector;
 
 import bgWork.handler.CanvasPanelHandler;
 import mod.IClassPainter;
-import mod.IConnectableObject;
 import mod.IFuncComponent;
 
 @SuppressWarnings("serial")
-public class BasicClass extends Shape implements IFuncComponent, IClassPainter, IConnectableObject
+public class BasicClass extends Shape implements IFuncComponent, IClassPainter
 {
 	Vector <String>		texts			= new Vector <>();
 	Dimension			defSize			= new Dimension(150, 25);
 	int					maxLength		= 20;
-	int					textShiftX		= 5;
-	boolean				isSelect		= false;
-	int					selectBoxSize	= 8;
+	int					textShiftX		= 5;		
 	
 	CanvasPanelHandler	cph;
 
@@ -80,15 +77,6 @@ public class BasicClass extends Shape implements IFuncComponent, IClassPainter, 
 		}
 	}
 
-	@Override
-	public void setText(String text)
-	{
-		texts.clear();
-		texts.add(text);
-		texts.add("<empty>");
-		this.repaint();
-	}
-
 	public void addText(String text)
 	{
 		texts.add(text);
@@ -103,35 +91,13 @@ public class BasicClass extends Shape implements IFuncComponent, IClassPainter, 
 			this.repaint();
 		}
 	}
-
-	public boolean isSelect()
-	{
-		return isSelect;
-	}
-
-	public void setSelect(boolean isSelect)
-	{
-		this.isSelect = isSelect;
-		if (!isSelect) {
-			selectedPortPoint = null;
-		}
-	}
-
-	@Override
-	public void paintSelect(Graphics gra)
-	{
-		for(int i = 0; i < ports.length; i++) {
-			gra.fillRect(ports[i].x, ports[i].y, ports[i].width, ports[i].height);
-		}
-	}
 	
-	public void setPort() {
-		int[] x_point = {this.getWidth() / 2 - selectBoxSize, this.getWidth() / 2 - selectBoxSize, 0, this.getWidth() - selectBoxSize};
-		int[] y_point = {0, this.getHeight() - selectBoxSize, this.getHeight() / 2 - selectBoxSize, this.getHeight() / 2 - selectBoxSize};
-		int[] width = {selectBoxSize * 2, selectBoxSize * 2, selectBoxSize, selectBoxSize};
-		int[] height = {selectBoxSize, selectBoxSize, selectBoxSize * 2, selectBoxSize * 2};
-		for(int i = 0; i < ports.length; i++) {
-			ports[i] = new Rectangle(x_point[i], y_point[i], width[i], height[i]);
-		}
+	@Override
+	public void setText(String text)
+	{
+		texts.clear();
+		texts.add(text);
+		texts.add("<empty>");
+		this.repaint();
 	}
 }

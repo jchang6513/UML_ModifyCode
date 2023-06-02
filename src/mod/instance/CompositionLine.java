@@ -63,29 +63,23 @@ public class CompositionLine extends JPanel
 	}
 	
 	private boolean shouldHighlight() {
-		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
-//		System.out.println(fromSelectedPortPoint);
+		Point fromSelectedPortPoint = ((Shape) from).selectedPortPoint;
 		if (fromSelectedPortPoint != null) {
 			int selectedFromSide = new AreaDefine().getArea(
 					from.getLocation(), 
 					from.getSize(),
 					fromSelectedPortPoint
 			);
-//			System.out.println(fromSide);
-//			System.out.println(selectedFromSide);
 			if (fromSide == selectedFromSide) return true;
 		}
 		
-		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
-//		System.out.println(toSelectedPortPoint);
+		Point toSelectedPortPoint = ((Shape) to).selectedPortPoint;
 		if (toSelectedPortPoint != null) {
 			int selectedToSide = new AreaDefine().getArea(
 					to.getLocation(), 
 					to.getSize(), 
-					((BasicClass) to).selectedPortPoint
+					toSelectedPortPoint
 			);
-//			System.out.println(toSide);
-//			System.out.println(selectedToSide);
 			if (toSide == selectedToSide) return true;
 		}
 

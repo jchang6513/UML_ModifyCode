@@ -16,8 +16,6 @@ public class UseCase extends Shape implements IFuncComponent, IClassPainter
 	Vector <String>		texts			= new Vector <>();
 	Dimension			defSize			= new Dimension(150, 40);
 	int					maxLength		= 20;
-	boolean				isSelect		= false;
-	int					selectBoxSize	= 8;
 
 	CanvasPanelHandler	cph;
 
@@ -59,19 +57,6 @@ public class UseCase extends Shape implements IFuncComponent, IClassPainter
 		}
 	}
 
-	public boolean isSelect()
-	{
-		return isSelect;
-	}
-
-	public void setSelect(boolean isSelect)
-	{
-		this.isSelect = isSelect;
-		if (!isSelect) {
-			selectedPortPoint = null;
-		}
-	}
-
 	@Override
 	public void reSize()
 	{
@@ -92,23 +77,5 @@ public class UseCase extends Shape implements IFuncComponent, IClassPainter
 		texts.clear();
 		texts.add(text);
 		this.repaint();
-	}
-
-	@Override
-	public void paintSelect(Graphics gra)
-	{
-		for(int i = 0; i < ports.length; i++) {
-			gra.fillRect(ports[i].x, ports[i].y, ports[i].width, ports[i].height);
-		}
-	}
-	
-	public void setPort() {
-		int[] x_point = {this.getWidth() / 2 - selectBoxSize, this.getWidth() / 2 - selectBoxSize, 0, this.getWidth() - selectBoxSize};
-		int[] y_point = {0, this.getHeight() - selectBoxSize, this.getHeight() / 2 - selectBoxSize, this.getHeight() / 2 - selectBoxSize};
-		int[] width = {selectBoxSize * 2, selectBoxSize * 2, selectBoxSize, selectBoxSize};
-		int[] height = {selectBoxSize, selectBoxSize, selectBoxSize * 2, selectBoxSize * 2};
-		for(int i = 0; i < ports.length; i++) {
-			ports[i] = new Rectangle(x_point[i], y_point[i], width[i], height[i]);
-		}
 	}
 }
