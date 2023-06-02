@@ -7,14 +7,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Vector;
 
-import javax.swing.JPanel;
-
 import bgWork.handler.CanvasPanelHandler;
 import mod.IClassPainter;
+import mod.IConnectableObject;
 import mod.IFuncComponent;
 
 @SuppressWarnings("serial")
-public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
+public class BasicClass extends Shape implements IFuncComponent, IClassPainter, IConnectableObject
 {
 	Vector <String>		texts			= new Vector <>();
 	Dimension			defSize			= new Dimension(150, 25);
@@ -22,8 +21,6 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 	int					textShiftX		= 5;
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 8;
-	protected Rectangle[] ports = new Rectangle[4];
-	Point selectedPortPoint = null;
 	
 	CanvasPanelHandler	cph;
 
@@ -135,25 +132,6 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 		int[] height = {selectBoxSize, selectBoxSize, selectBoxSize * 2, selectBoxSize * 2};
 		for(int i = 0; i < ports.length; i++) {
 			ports[i] = new Rectangle(x_point[i], y_point[i], width[i], height[i]);
-		}
-	}
-	
-	public void setSelectedSide(Point point) {
-		Point p = new Point();
-		p.x = point.x - this.getLocation().x;
-		p.y = point.y - this.getLocation().y;
-		System.out.println("Basic Class set selected side");
-		for(int i = 0; i < ports.length; i++) {
-			System.out.print(i);
-			System.out.print(", ");
-			System.out.print(ports[i]);
-			System.out.print(", ");
-			System.out.print(p);
-			System.out.print(", ");
-			System.out.println(ports[i].contains(p));
-			if (ports[i].contains(p)) {
-				selectedPortPoint = point;	
-			}			
 		}
 	}
 }

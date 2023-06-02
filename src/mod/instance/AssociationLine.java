@@ -72,14 +72,7 @@ public class AssociationLine extends JPanel
 	}
 	
 	private boolean shouldHighlight() {
-		switch(Core.isClass(Object obj))
-		{
-			case 0:
-				
-			case 1:
-				
-		}
-		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
+		Point fromSelectedPortPoint = ((Shape) from).selectedPortPoint;
 //		System.out.println(fromSelectedPortPoint);
 		if (fromSelectedPortPoint != null) {
 			int selectedFromSide = new AreaDefine().getArea(
@@ -92,13 +85,13 @@ public class AssociationLine extends JPanel
 			if (fromSide == selectedFromSide) return true;
 		}
 		
-		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
+		Point toSelectedPortPoint = ((Shape) to).selectedPortPoint;
 //		System.out.println(toSelectedPortPoint);
 		if (toSelectedPortPoint != null) {
 			int selectedToSide = new AreaDefine().getArea(
 					to.getLocation(), 
 					to.getSize(), 
-					((BasicClass) to).selectedPortPoint
+					toSelectedPortPoint
 			);
 //			System.out.println(toSide);
 //			System.out.println(selectedToSide);
