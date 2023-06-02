@@ -91,6 +91,8 @@ public class FuncPanelHandler extends PanelHandler
 	@Override
 	public void ActionPerformed(MouseEvent e)
 	{
+//		System.out.println(btnlist);
+//		System.out.println(btnlist.indexOf(e.getSource()));
 		setCurrentBtn(btnlist.indexOf(e.getSource()));
 	}
 

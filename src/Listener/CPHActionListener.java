@@ -34,7 +34,6 @@ public class CPHActionListener extends HandlerActionListener
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		System.out.println("mouse released");
 		to = e.getPoint();
 		toObj = e.getComponent();
 		try
@@ -60,7 +59,6 @@ public class CPHActionListener extends HandlerActionListener
 	@Override
 	public void mouseDragged(MouseEvent e)
 	{
-		System.out.println("mouse dragged");
 		to = e.getPoint();
 		toObj = e.getComponent();
 		try
