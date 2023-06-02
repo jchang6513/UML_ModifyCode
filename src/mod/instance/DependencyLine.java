@@ -44,12 +44,47 @@ public class DependencyLine extends JPanel implements IFuncComponent, ILinePaint
 		tpPrime = new Point(tp.x - this.getLocation().x, tp.y - this.getLocation().y);
 		BasicStroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
 		Graphics2D g2d = (Graphics2D) g.create();
+		if (shouldHighlight()) {
+			g2d.setColor(Color.RED);
+		} else {
+			g2d.setColor(Color.BLACK);
+		}
 		g2d.setStroke(dashed);
 		g2d.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		g2d.dispose();
 		if (isSelect == true) {
 			paintSelect(g);
 		}
+	}
+	
+	private boolean shouldHighlight() {
+		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
+//		System.out.println(fromSelectedPortPoint);
+		if (fromSelectedPortPoint != null) {
+			int selectedFromSide = new AreaDefine().getArea(
+					from.getLocation(), 
+					from.getSize(),
+					fromSelectedPortPoint
+			);
+//			System.out.println(fromSide);
+//			System.out.println(selectedFromSide);
+			if (fromSide == selectedFromSide) return true;
+		}
+		
+		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
+//		System.out.println(toSelectedPortPoint);
+		if (toSelectedPortPoint != null) {
+			int selectedToSide = new AreaDefine().getArea(
+					to.getLocation(), 
+					to.getSize(), 
+					((BasicClass) to).selectedPortPoint
+			);
+//			System.out.println(toSide);
+//			System.out.println(selectedToSide);
+			if (toSide == selectedToSide) return true;
+		}
+
+		return false;
 	}
 
 	@Override

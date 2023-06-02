@@ -56,7 +56,7 @@ public class AssociationLine extends JPanel
 //		System.out.println(toSide == ((BasicClass) to).selectedSide);
 //		System.out.println(tpPrime);
 //		System.out.println(isSelect);					
-		if (shouldHightlight()) {
+		if (shouldHighlight()) {
 			g.setColor(Color.RED);
 		} else {
 			g.setColor(Color.BLACK);
@@ -69,30 +69,30 @@ public class AssociationLine extends JPanel
 		}
 	}
 	
-	private boolean shouldHightlight() {
+	private boolean shouldHighlight() {
 		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
-		System.out.println(fromSelectedPortPoint);
+//		System.out.println(fromSelectedPortPoint);
 		if (fromSelectedPortPoint != null) {
 			int selectedFromSide = new AreaDefine().getArea(
 					from.getLocation(), 
 					from.getSize(),
 					fromSelectedPortPoint
 			);
-			System.out.println(fromSide);
-			System.out.println(selectedFromSide);
+//			System.out.println(fromSide);
+//			System.out.println(selectedFromSide);
 			if (fromSide == selectedFromSide) return true;
 		}
 		
 		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
-		System.out.println(toSelectedPortPoint);
+//		System.out.println(toSelectedPortPoint);
 		if (toSelectedPortPoint != null) {
 			int selectedToSide = new AreaDefine().getArea(
 					to.getLocation(), 
 					to.getSize(), 
 					((BasicClass) to).selectedPortPoint
 			);
-			System.out.println(toSide);
-			System.out.println(selectedToSide);
+//			System.out.println(toSide);
+//			System.out.println(selectedToSide);
 			if (toSide == selectedToSide) return true;
 		}
 

@@ -15,6 +15,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
+@SuppressWarnings("serial")
 public class CompositionLine extends JPanel
 		implements IFuncComponent, ILinePainter
 {
@@ -48,13 +49,47 @@ public class CompositionLine extends JPanel
 				fp.y - this.getLocation().y);
 		tpPrime = new Point(tp.x - this.getLocation().x,
 				tp.y - this.getLocation().y);
-		g.setColor(Color.BLACK);
+		if (shouldHighlight()) {
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.BLACK);
+		}
 		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
 		if (isSelect == true)
 		{
 			paintSelect(g);
 		}
+	}
+	
+	private boolean shouldHighlight() {
+		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
+//		System.out.println(fromSelectedPortPoint);
+		if (fromSelectedPortPoint != null) {
+			int selectedFromSide = new AreaDefine().getArea(
+					from.getLocation(), 
+					from.getSize(),
+					fromSelectedPortPoint
+			);
+//			System.out.println(fromSide);
+//			System.out.println(selectedFromSide);
+			if (fromSide == selectedFromSide) return true;
+		}
+		
+		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
+//		System.out.println(toSelectedPortPoint);
+		if (toSelectedPortPoint != null) {
+			int selectedToSide = new AreaDefine().getArea(
+					to.getLocation(), 
+					to.getSize(), 
+					((BasicClass) to).selectedPortPoint
+			);
+//			System.out.println(toSide);
+//			System.out.println(selectedToSide);
+			if (toSide == selectedToSide) return true;
+		}
+
+		return false;
 	}
 
 	@Override

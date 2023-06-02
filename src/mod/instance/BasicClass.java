@@ -21,7 +21,7 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 	int					maxLength		= 20;
 	int					textShiftX		= 5;
 	boolean				isSelect		= false;
-	int					selectBoxSize	= 5;
+	int					selectBoxSize	= 8;
 	protected Rectangle[] ports = new Rectangle[4];
 	Point selectedPortPoint = null;
 	
