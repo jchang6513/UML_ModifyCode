@@ -46,12 +46,57 @@ public class AssociationLine extends JPanel
 				fp.y - this.getLocation().y);
 		tpPrime = new Point(tp.x - this.getLocation().x,
 				tp.y - this.getLocation().y);
+//		System.out.println(fpPrime);
+//		System.out.println(tpPrime);
+//		System.out.println(((BasicClass) from).isSelect());
+//		System.out.println(((BasicClass) from).selectedSide);
+//		System.out.println(fromSide == ((BasicClass) from).selectedSide);
+//		System.out.println(((BasicClass) to).isSelect());
+//		System.out.println(((BasicClass) to).selectedSide);
+//		System.out.println(toSide == ((BasicClass) to).selectedSide);
+//		System.out.println(tpPrime);
+//		System.out.println(isSelect);					
+		if (shouldHightlight()) {
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.BLACK);
+		}
 		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
 		if (isSelect == true)
 		{
 			paintSelect(g);
 		}
+	}
+	
+	private boolean shouldHightlight() {
+		Point fromSelectedPortPoint = ((BasicClass) from).selectedPortPoint;
+		System.out.println(fromSelectedPortPoint);
+		if (fromSelectedPortPoint != null) {
+			int selectedFromSide = new AreaDefine().getArea(
+					from.getLocation(), 
+					from.getSize(),
+					fromSelectedPortPoint
+			);
+			System.out.println(fromSide);
+			System.out.println(selectedFromSide);
+			if (fromSide == selectedFromSide) return true;
+		}
+		
+		Point toSelectedPortPoint = ((BasicClass) to).selectedPortPoint;
+		System.out.println(toSelectedPortPoint);
+		if (toSelectedPortPoint != null) {
+			int selectedToSide = new AreaDefine().getArea(
+					to.getLocation(), 
+					to.getSize(), 
+					((BasicClass) to).selectedPortPoint
+			);
+			System.out.println(toSide);
+			System.out.println(selectedToSide);
+			if (toSide == selectedToSide) return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -80,8 +125,6 @@ public class AssociationLine extends JPanel
 				mfp);
 		toSide = new AreaDefine().getArea(to.getLocation(), to.getSize(), mtp);
 		renewConnect();
-		System.out.println("from side " + fromSide);
-		System.out.println("to side " + toSide);
 	}
 
 	void renewConnect()

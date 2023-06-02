@@ -56,7 +56,10 @@ public class CanvasPanelHandler extends PanelHandler
 	@Override
 	public void ActionPerformed(MouseEvent e)
 	{
-		switch (core.getCurrentFuncIndex())
+		System.out.println(e);
+		int funcIndex = core.getCurrentFuncIndex();
+		System.out.println(core.getCurrentFuncIndex());
+		switch (funcIndex)
 		{
 			case 0:
 				selectByClick(e);
@@ -119,7 +122,12 @@ public class CanvasPanelHandler extends PanelHandler
 				switch (core.isFuncComponent(members.elementAt(i)))
 				{
 					case 0:
-						((BasicClass) members.elementAt(i)).setSelect(true);
+						if (((BasicClass) members.elementAt(i)).isSelect()) {
+							((BasicClass) members.elementAt(i)).setSelectedSide(e.getPoint());							
+						} else {
+							((BasicClass) members.elementAt(i)).setSelect(true);
+						}
+						
 						selectComp.add(members.elementAt(i));
 						isSelect = true;
 						break;
@@ -464,6 +472,7 @@ public class CanvasPanelHandler extends PanelHandler
 
 	public void setContext(SendText tr)
 	{
+		System.out.print("Canvas Panel Handler setContext");
 		System.out.println(tr.getText());
 		try
 		{

@@ -23,7 +23,8 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
 	protected Rectangle[] ports = new Rectangle[4];
-
+	Point selectedPortPoint = null;
+	
 	CanvasPanelHandler	cph;
 
 	public BasicClass(CanvasPanelHandler cph)
@@ -113,8 +114,10 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 
 	public void setSelect(boolean isSelect)
 	{
-		System.out.println(isSelect);
 		this.isSelect = isSelect;
+		if (!isSelect) {
+			selectedPortPoint = null;
+		}
 	}
 
 	@Override
@@ -133,9 +136,24 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 		for(int i = 0; i < ports.length; i++) {
 			ports[i] = new Rectangle(x_point[i], y_point[i], width[i], height[i]);
 		}
-		
-
-
-		
+	}
+	
+	public void setSelectedSide(Point point) {
+		Point p = new Point();
+		p.x = point.x - this.getLocation().x;
+		p.y = point.y - this.getLocation().y;
+		System.out.println("Basic Class set selected side");
+		for(int i = 0; i < ports.length; i++) {
+			System.out.print(i);
+			System.out.print(", ");
+			System.out.print(ports[i]);
+			System.out.print(", ");
+			System.out.print(p);
+			System.out.print(", ");
+			System.out.println(ports[i].contains(p));
+			if (ports[i].contains(p)) {
+				selectedPortPoint = point;	
+			}			
+		}
 	}
 }
